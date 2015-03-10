@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>BI监控Web版</title>
+    <!-- Path to Framework7 Library CSS-->
+    <link rel="stylesheet" href="css/framework7.min.css">
+    <!-- Path to your custom app styles-->
+    <style>
+        html {
+            font-size: 300%;
+            -webkit-tap-highlight-color: transparent;
+            min-width: 320px;
+            height:100%;
+            /* rem作为元素的单位，1rem=50px   */
+
+        }
+        body {
+            margin: 0;;
+            font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+            font-size: .28rem;
+            line-height: 1;
+            color: #333;
+            background: #fff;;
+            height:100%;
+        }
+        .title01{color: #ff9000;font-weight: 500;font-size: .6rem;}
+        .logo {
+            width:1.12rem;
+            height: 1.12rem;
+            background: url(./img/icon02.png) center no-repeat #efeff4;
+            background-size: 100%;
+            text-indent: -9999px;
+            border-radius: 5px;
+            margin: 0 auto;
+        }
+        .views .login-input-content {
+            margin-bottom: 0;
+        }
+        .content-block {
+            margin: 35px 0;
+            padding: 0 15px;
+            color: #6d6d72;
+        }
+        .views .login-input-content {
+            margin-bottom: 0
+        }
+
+        .views .login-input-content .list-block {
+            margin-bottom: 0
+        }
+
+        .views .login-input-content .list-block input {
+            border: 1px solid #dfdfdf;
+            background-color: #fff;
+            background-repeat: no-repeat;
+            color: #666;
+            padding: 0 5px 0 40px
+        }
+
+        .views .login-input-content .list-block .login-name {
+            border-bottom: none;
+            background-image: url(./img/user.png);
+            background-position: 4px 5px
+        }
+
+        .views .login-input-content .list-block .password {
+            background-image: url(./img/password.png);
+            background-position: 7px 6px
+        }
+        .didi-btn{width: 100%;font-size: .4rem;}
+        .panel.panel-target {
+            border-left: 1px solid #636363;
+            z-index: 1000;
+            display: none;
+            background: #fff;}
+        .panel-target-box .content-block-title, .product-list-box .content-block-title{font-size: .4rem;color:#383838;}
+        .product-list-box .item-title{font-size: .3rem;}
+        .product-list-box .item-link{cursor: pointer;}
+        .echart-box{transition: transform 0.5s ease-in  1s;}
+        .chart-rota{
+
+            -moz-transform:rotate(90deg) translate(-5%,-90%);
+            -webkit-transform:rotate(90deg) translate(-5%,-90%);
+            -o-transform:rotate(90deg) translate(-5%,-90%);
+            -ms-transform:rotate(90deg) translate(-5%,-90%);
+            -moz-transform-origin:left top;
+            -webkit-transform-origin:left top;
+            -o-transform-origin:left top;
+            -ms-transform-origin:left top;
+            transform-origin:left top;
+            transform: rotate(90deg) translate(-5%,-90%);
+        }
+        .page-content{background: #fff;}
+        .content-block-inner:after, .content-block-inner:before{background: #fff;}
+		.rel{position:relative;}
+		p{line-height: 1.2em;}
+    </style>
+    <!-- Path to Framework7 Library JS-->
+</head>
+<body>
+    <!-- Status bar overlay for fullscreen mode-->
+    <div class="statusbar-overlay"></div>
+    <!-- Panels overlay-->
+    <div class="panel-overlay"></div>
+	<!-- left Panel with Cover effect -->
+	<div class="panel panel-left panel-reveal">
+    <div class="content-block">
+      <p>个人中心</p>
+      <p><a href="#" class="panel-close">敬请期待</a></p>
+      <p><a href="#" class="panel-close" id="goPC">回到PC版</a></p>
+    </div>
+  </div>
+
+    <!-- Right Panel with Cover effect -->
+    <div class="panel panel-right panel-cover panel-target">
+        <div class="content-block panel-target-box" id="panelMonitor">
+
+        </div>
+    </div>
+    <!-- Views-->
+    <div class="views">
+      <!-- Your main view, should have "view-main" class-->
+      <div class="view view-main">
+        <!-- Top Navbar-->
+        <div class="navbar">
+          <div class="navbar-inner">
+            <!-- We have home navbar without left link-->
+			 <div class="left"><a href="#" data-panel="left" class="open-panel">更多</a></p></div>
+            <div class="center sliding title01">Bi业务实时监控</div>
+          </div>
+        </div>
+        <!-- Pages, because we need fixed-through navbar and toolbar, it has additional appropriate classes-->
+        <div class="pages navbar-through toolbar-through">
+          <!-- Page, data-page contains page name-->
+          <div data-page="index" class="page">
+            <!-- Scrollable page content-->
+            <div class="page-content ">
+                  <div class="content-block">
+                      <div class="logo">滴滴打车</div>
+                  </div>
+                <form onsubmit="return false;" id="loginForm">
+                  <div class="content-block login-input-content">
+                      <div class="store-data list-block">
+                          <div><input type="text" class="login-name" value="bi_111" placeholder="用户名" id="userName"></div>
+                          <div><input type="password" class="password" value="sss" placeholder="密码" id="pwd"></div>
+                      </div>
+                  </div>
+                  <div class="content-block login-btn-content">
+                      <button type="submit"   class="button button-big login-submit button-fill color-orange didi-btn" id="loginBtn">登录</button>
+                  </div>
+                </form>
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Path to Framework7 Library JS-->
+    <script type="text/javascript" src="./js/libs/framework7.min.js"></script>
+    <script type="text/javascript" src="./js/libs/echarts.js"></script>
+    <script type="text/javascript" src="./js/libs/line.js"></script>
+    <!-- Path to your app js-->
+    <script type="text/javascript" src="./js/my-app.js"></script>
+    <script type="text/javascript" src="./js/data.js"></script>
